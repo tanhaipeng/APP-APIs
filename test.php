@@ -16,3 +16,8 @@ class Singleton{
     }
 }
 
+require_once 'libs/db/DB.class.php';
+require_once 'config.php';
+$db=DB::getInstance();
+var_dump($db->connect($dbConfig));
+
