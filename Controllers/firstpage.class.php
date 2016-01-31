@@ -18,7 +18,14 @@ class firstpage{
         global $dbConfig;
         $offset=($this->_page-1)*$this->_pagesize;
         $sql="select * from mall where status=1 order by price limit ".$offset.','.$this->_pagesize;
-        $conn=DB::getInstance()->connect($dbConfig);
+        // Òì³£½ÓÊÕ
+        try{
+            $conn=DB::getInstance()->connect($dbConfig);
+        }catch(Exception $e){
+            // $e->getMessage()
+            response::getEncode(400,'database connect error','');
+            exit();
+        }
         $res=mysqli_query($conn,$sql);
         $rdata=array();
         while($row=mysqli_fetch_assoc($res)){
