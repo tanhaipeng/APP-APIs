@@ -16,14 +16,14 @@ class DB{
         return self::$_instance;
     }
     
-    public function connect($dbConfig){
+    public function connect($dbConfig=array()){
         if(!self::$_connect){ 
-        self::$_connect=mysql_connect($dbConfig['host'],$dbConfig['user'],$dbConfig['password']);
+        self::$_connect=mysqli_connect($dbConfig['host'],$dbConfig['user'],$dbConfig['password']);
          if(!self::$_connect){
-             die('mysql connect error:'.mysql_errno(self::$_connect));
+             die('mysql connect error:'.mysqli_errno(self::$_connect));
          }
-         mysql_select_db($dbConfig['database'],self::$_connect);
-         mysql_query('set names utf8',self::$_connect);
+         mysqli_select_db(self::$_connect,$dbConfig['database']);
+         mysqli_query(self::$_connect,'set names utf8');
          return self::$_connect;
         }
     }
