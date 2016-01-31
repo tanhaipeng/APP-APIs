@@ -1,7 +1,7 @@
 <?php
 require_once 'libs/DB.class.php';
+require_once 'libs/Cache.class.php';
 require_once 'config.php';
-
 
 class firstpage{
     private $_page;
