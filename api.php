@@ -4,8 +4,8 @@
  * http://***?type=firstpage&page=1&pagesize=10
  */
 
-require_once 'libs/firstpage.class.php';
-require_once 'libs/defaultpage.class.php';
+require_once 'Controllers/firstpage.class.php';
+require_once 'Controllers/defaultpage.class.php';
 require_once 'libs/Response.class.php';
 
 // route
