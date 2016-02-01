@@ -11,8 +11,6 @@ require_once 'libs/Response.class.php';
 
 // route
 $type=isset($_GET['type'])?$_GET['type']:'default';
-$cache=new Cache();
-$cache->cacheData('sfdf',array(1,2,3),180);
 
 switch ($type){
     case 'firstpage':

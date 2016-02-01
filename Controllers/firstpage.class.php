@@ -27,6 +27,7 @@ class firstpage{
         
         // 否则读取数据库，并且更新缓存
         global $dbConfig;
+        global $cacheConfig;
         $offset=($this->_page-1)*$this->_pagesize;
         $sql="select * from mall where status=1 order by price limit ".$offset.','.$this->_pagesize;
         // 异常接收
@@ -41,7 +42,7 @@ class firstpage{
         while($row=mysqli_fetch_assoc($res)){
             $rdata[]=$row;
         }
-        $cache->cacheData('index_cache_'.$this->_page.'-'.$this->_pagesize,$rdata,$cacheConfig['expiretime']);
+        $cache->cacheData('index_cache_'.$this->_page.'_'.$this->_pagesize,$rdata,$cacheConfig['expiretime']);
         response::getEncode(0,'request success',$rdata);
         exit();
     }
