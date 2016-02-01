@@ -15,6 +15,17 @@ class firstpage{
             response::getEncode(100,'request error','');
             exit();
         }
+        // get from cache
+        $cache=new Cache();
+        $rdata=array();
+        
+        // 存在缓存时，直接获取缓存并返回
+        if($rdata=$cache->cacheData('index_cache_'.$this->_page.'-'.$this->_pagesize)){
+            response::getEncode(0,'request success',$rdata);
+            exit();
+        }
+        
+        // 否则读取数据库，并且更新缓存
         global $dbConfig;
         $offset=($this->_page-1)*$this->_pagesize;
         $sql="select * from mall where status=1 order by price limit ".$offset.','.$this->_pagesize;
@@ -27,10 +38,10 @@ class firstpage{
             exit();
         }
         $res=mysqli_query($conn,$sql);
-        $rdata=array();
         while($row=mysqli_fetch_assoc($res)){
             $rdata[]=$row;
         }
+        $cache->cacheData('index_cache_'.$this->_page.'-'.$this->_pagesize,$rdata,$cacheConfig['expiretime']);
         response::getEncode(0,'request success',$rdata);
         exit();
     }
