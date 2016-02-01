@@ -12,6 +12,7 @@ require_once 'libs/Response.class.php';
 // route
 $type=isset($_GET['type'])?$_GET['type']:'default';
 
+
 switch ($type){
     case 'firstpage':
         $firstpage=new firstpage();
